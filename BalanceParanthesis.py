@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
-#from pyclasses.ds.Stack import Stack
-from pyclasses.ds.Stack import *
+from ds.Stack import *
 
 def isMatch( sP, cP ):
 	if ((sP == "{" and cP == "}") or (sP == "[" and cP == "]") or (sP == "(" and cP == ")")):
@@ -23,6 +22,7 @@ def isBalanced(exp):
 				if not isMatch(stkChar, char):
 					return False
 			except Exception as e:
+				print ("Exception:", e)
 				return False
 		else:
 			continue
@@ -34,8 +34,8 @@ def isBalanced(exp):
 	return True
 
 def main():
-	exp = "aernawejbasdahnwaawej"
-	#exp = "{aern{awejb[asd]}ahnwa(awej)}"
+	#exp = "aernawejbasdahnwaawej"
+	exp = "{aern{awejb[asd]}ahnwa(awej)}"
 	print (isBalanced(exp))
 
 if __name__ == "__main__":

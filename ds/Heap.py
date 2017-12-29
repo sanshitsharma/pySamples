@@ -106,3 +106,11 @@ class Heap:
 
         self.reheapify(elem_index)
         return True
+
+    def peek(self):
+        return self.__items[0]
+
+    def pop(self):
+        num = self.__items[0]
+        self.delete(self.__items[0])
+        return num

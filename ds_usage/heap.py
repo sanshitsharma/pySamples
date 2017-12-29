@@ -16,6 +16,9 @@ def main():
 
     if min_heap.delete(1):
         print min_heap.print_heap()
+    
+    print min_heap.pop()
+    print min_heap.print_heap()
 
 if __name__ == "__main__":
     main()

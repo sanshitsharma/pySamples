@@ -6,4 +6,4 @@ __author__ = """Sanshit Sharma"""
 __email__ = 'sanshit.sharma@gmail.com'
 __version__ = '0.1.0'
 
-from . import Stack, LinkedList, Heap
+from . import Stack, LinkedList, Heap, BST

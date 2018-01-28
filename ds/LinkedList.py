@@ -105,3 +105,13 @@ class LinkedList(object):
             slow = slow.get_next()
 
         return slow
+
+    def show(self):
+        curr = self.head
+        string = ''
+        while curr.get_next() != None:
+            string += str(curr.get_data()) + ' --> '
+            curr = curr.get_next()
+        string += str(curr.get_data())
+
+        print string

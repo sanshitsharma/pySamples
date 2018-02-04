@@ -13,9 +13,13 @@ def main():
     bst.insert(60)
     bst.insert(80)
 
-    bst.print_bst(Type.PREORDER)
+    print bst.breadth_first_traversal()
 
-    print bst.serialize()
+    print bst.depth_first_traversal()
+
+    #bst.print_bst(Type.PREORDER)
+
+    #print bst.serialize()
 
     """
     num = 40

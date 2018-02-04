@@ -228,3 +228,36 @@ class BST:
             if is_root:
                 return 0
             return -1
+
+    def __bft(self, q):
+        bf_trav = ''
+        while q:
+            curr = q.pop(0)
+            bf_trav += str(curr.value) + ' '
+            if curr.left is not None:
+                q.append(curr.left)
+            if curr.right is not None:
+                q.append(curr.right)
+
+        return bf_trav
+
+    def breadth_first_traversal(self):
+        q = [self.root]
+        return self.__bft(q)
+
+
+    def __dft(self, q):
+        df_trav = ''
+        while q:
+            curr = q.pop()
+            df_trav += str(curr.value) + ' '
+            if curr.right is not None:
+                q.append(curr.right)
+            if curr.left is not None:
+                q.append(curr.left)
+
+        return df_trav
+
+    def depth_first_traversal(self):
+        q = [self.root]
+        return self.__dft(q)

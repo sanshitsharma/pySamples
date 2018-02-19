@@ -18,9 +18,23 @@ class Permutations:
                 self.permute(a, l+1)
                 a[l], a[i] = a[i], a[l] # backtrack
 
+def permute(lst, start, end):
+    if start == end:
+        print ''.join(lst)
+        return
+
+    for i in range(start, end+1):
+        lst[start], lst[i] = lst[i], lst[start]
+        permute(lst, start+1, end)
+        lst[start], lst[i] = lst[i], lst[start]
+
 def main():
-    str = '000111'
-    Permutations.permutations(str)
+    string = 'JON'
+    lst = list(string)
+    start = 0
+    end = len(string) - 1
+    permute(lst, start, end)
+    #Permutations.permutations(str)
 
 if __name__ == "__main__":
     main()

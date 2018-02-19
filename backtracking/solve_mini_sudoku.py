@@ -50,6 +50,7 @@ def solve(grid, empties=9):
 
     return False
 
+'''
 def print_row_col_cell(grid):
     for r, c in product(range(len(grid)), repeat=2):
         i = r/3
@@ -57,11 +58,11 @@ def print_row_col_cell(grid):
         cell = 3*i + j
 
         print "Indx (" + str(r) + ", " + str(c) + "): Cell = " + str(cell)
+'''
 
 if __name__ == "__main__":
     grid = [[0, 2, 0], [3, 1, 0], [0, 3, 0]]
-    print_row_col_cell(grid)
-    '''
+    #print_row_col_cell(grid)
     res = solve(grid, empties=5)
     if res:
         for r in range(len(grid)):
@@ -71,4 +72,3 @@ if __name__ == "__main__":
             print string
     else:
         print "No valid solution for sudoku board"
-    '''

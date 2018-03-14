@@ -17,6 +17,24 @@ class Node(object):
 class LinkedList(object):
     def __init__(self, head = None):
         self.head = head
+        self.curr_is_assigned = False
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if not self.curr_is_assigned:
+            self.curr = self.head
+            self.curr_is_assigned = True
+
+        if self.curr is None:
+            # Reset
+            self.curr_is_assigned = False
+            raise StopIteration
+        
+        val = self.curr.data
+        self.curr = self.curr.next_node
+        return val
 
     def insert_at_head(self, data):
         new_node = Node(data)

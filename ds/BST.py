@@ -261,3 +261,13 @@ class BST:
     def depth_first_traversal(self):
         q = [self.root]
         return self.__dft(q)
+
+    def max_depth(self, node):
+        if node is None:
+            return 0
+
+        return 1 + max(self.max_depth(node.left), self.max_depth(node.right))
+
+    def height(self):
+        return self.max_depth(self.root)
+

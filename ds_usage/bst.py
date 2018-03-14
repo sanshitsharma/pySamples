@@ -16,6 +16,8 @@ def main():
     print bst.breadth_first_traversal()
 
     print bst.depth_first_traversal()
+    
+    print bst.height()
 
     #bst.print_bst(Type.PREORDER)
 

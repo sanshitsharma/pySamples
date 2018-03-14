@@ -1,0 +1,9 @@
+{
+	"args": {
+		"pause_time": {
+			"type": "int",
+			"required": true
+		}
+	},
+	"supports_check_mode": true
+}

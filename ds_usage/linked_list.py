@@ -24,21 +24,27 @@ def main():
     llist.insert_at_end(8)
     llist.insert_at_end(1)
     llist.insert_at_end(10)
+
+    print "\nPretty print the list"
     llist.show()
 
-    print "Testing delete from linked list"
+    print "\nIterate over the list"
+    for val in llist:
+        print val
+
+    print "\nTesting delete from linked list"
     llist.delete_from_head()
     llist.delete_from_end()
     llist.show()
 
-    print "Testing reversing a linked list"
+    print "\nTesting reversing a linked list"
     llist.reverse()
     llist.show()
 
-    print "Testing find linked list mid point"
+    print "\nTesting find linked list mid point"
     print "Mid: " + str(llist.get_mid().data)
 
-    print "Create a new linked list"
+    print "\nCreate a new linked list"
     ll = LinkedList()
     ll.insert_at_end('a')
     ll.insert_at_end('b')
@@ -52,6 +58,6 @@ def main():
     
     # Write a function to modify the linked list such that 
     # a -> b -> c -> d -> e -> f becomes a -> f -> b -> e -> c -> d
-
+    
 if __name__ == "__main__":
     main()

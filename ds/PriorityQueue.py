@@ -86,8 +86,8 @@ class PriorityQueue:
                 num_children = 2
             elif c1_indx <= num_elems:
                 num_children = 1
-
-            '''            
+            
+            '''
             print "num children =", num_children
             elems = [(item.priority, item.entry_count, item.data) for item in self.__pq ]
             print elems
@@ -114,6 +114,10 @@ class PriorityQueue:
                 if self.__pq[indx].priority >= self.__pq[c1_indx].priority:
                     if self.__check_count_and_swap(indx, c1_indx):
                         indx = c1_indx
+                    else:
+                        break
+                else:
+                    break
             else:
                 break
 

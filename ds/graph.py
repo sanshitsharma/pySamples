@@ -180,10 +180,12 @@ class AdjacencySetGraph(Graph):
                 print i.vertex_id, "-->", self.vertex_list[v].vertex_id
 
 if __name__ == "__main__":
-    g = AdjacencySetGraph(4, directed=True)
+    g = AdjacencyMatrixGraph(5, directed=False)
     g.add_edge(0, 1)
     g.add_edge(0, 2)
     g.add_edge(2, 3)
+    g.add_edge(1, 4)
+    g.add_edge(2, 4)
 
     for i in range(4):
         print "Adjacency to:", i, g.get_adjacenct_vertices(i)

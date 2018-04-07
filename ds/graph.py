@@ -28,7 +28,7 @@ class Graph(object):
         pass
 
     @abc.abstractmethod
-    def get_adjacenct_vertices(self, v):
+    def get_adjacent_vertices(self, v):
         pass
 
     @abc.abstractmethod
@@ -69,7 +69,7 @@ class AdjacencyMatrixGraph(Graph):
         if not self.directed:
             self.matrix[v2][v1] = weight
 
-    def get_adjacenct_vertices(self, v):
+    def get_adjacent_vertices(self, v):
         if v >= self.num_vertices or v < 0:
             raise ValueError('Vertex', v, 'is out of bounds')
 
@@ -99,7 +99,7 @@ class AdjacencyMatrixGraph(Graph):
 
     def display(self):
         for i in range(self.num_vertices):
-            for v in self.get_adjacenct_vertices(i):
+            for v in self.get_adjacent_vertices(i):
                 print i, "-->", v
 
 
@@ -120,7 +120,7 @@ class Node:
             raise ValueError("Vertex", v, "cannot be adjacent to itself")
         self.adjacency_set.add(v)
 
-    def get_adjacenct_vertices(self):
+    def get_adjacent_vertices(self):
         return sorted(self.adjacency_set)
 
 ######################################################################
@@ -151,7 +151,7 @@ class AdjacencySetGraph(Graph):
         if not self.directed:
             self.vertex_list[v2].add_edge(v1)
 
-    def get_adjacenct_vertices(self, v):
+    def get_adjacent_vertices(self, v):
         if v >= self.num_vertices or v < 0:
             raise ValueError("Vertex", v, "cannot be accessed")
 
@@ -188,13 +188,13 @@ if __name__ == "__main__":
     g.add_edge(2, 4)
 
     for i in range(4):
-        print "Adjacency to:", i, g.get_adjacenct_vertices(i)
+        print "Adjacency to:", i, g.get_adjacent_vertices(i)
 
     for i in range(4):
         print "Indegree:", i, g.get_indegree(i)
 
     for i in range(4):
-        for j in g.get_adjacenct_vertices(i):
+        for j in g.get_adjacent_vertices(i):
             print "Edge weight:", i, j, "weight:", g.get_edge_weight(i, j)
 
     g.display()

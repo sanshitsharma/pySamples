@@ -115,6 +115,9 @@ class Node:
         self.vertex_id = vertex_id
         self.adjacency_set = set()
 
+    def __str__(self):
+        return str(self.vertex_id)
+
     def add_edge(self, v):
         if self.vertex_id == v:
             raise ValueError("Vertex", v, "cannot be adjacent to itself")
@@ -176,11 +179,11 @@ class AdjacencySetGraph(Graph):
 
     def display(self):
         for i in self.vertex_list:
-            for v in i.get_adjacenct_vertices():
-                print i.vertex_id, "-->", self.vertex_list[v].vertex_id
+            for v in i.get_adjacent_vertices():
+                print i, "-->", self.vertex_list[v]
 
 if __name__ == "__main__":
-    g = AdjacencyMatrixGraph(5, directed=False)
+    g = AdjacencySetGraph(5, directed=False)
     g.add_edge(0, 1)
     g.add_edge(0, 2)
     g.add_edge(2, 3)

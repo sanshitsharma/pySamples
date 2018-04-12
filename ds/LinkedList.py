@@ -71,7 +71,9 @@ class LinkedList(object):
             print "list is empty"
             return
 
+        res = self.head
         self.head = self.head.get_next()
+        return res
 
     def delete_from_end(self):
         if self.head is None:

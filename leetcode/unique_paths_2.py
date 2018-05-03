@@ -1,5 +1,18 @@
 #!/usr/bin/python
 
+'''
+Problem #63: Unique Paths II
+A robot is located at the top-left corner of a m x n grid
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+An obstacle and empty space is marked as 1 and 0 respectively in the grid.
+
+Note: m and n will be at most 100.
+
+Ref: https://leetcode.com/problems/unique-paths-ii/description/ 
+'''
 class Solution(object):
     def uniquePathsWithObstacles(self, obstacleGrid):
         """

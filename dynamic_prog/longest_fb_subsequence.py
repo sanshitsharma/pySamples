@@ -39,10 +39,9 @@ def lfbs(a):
 
     for i in range(1, len(a)):
         for j in range(i):
-            if areCoprimes(a[i], a[j]) and lfbs[i] < lfbs[j] + 1:
+            if not areCoprimes(a[i], a[j]) and lfbs[i] < lfbs[j] + 1:
                 lfbs[i] = lfbs[j] + 1
 
-    print lfbs
     return max(lfbs)
 
 if __name__ == "__main__":

@@ -9,13 +9,15 @@ class Stack:
 
 	def pop(self):
 		if not self.isEmpty:
-			return self.items.pop()		
-		return None
+			return self.items.pop()
+			
+		raise ValueError('stack is empty')
 
 	def peek(self):
 		if not self.isEmpty():
 			return self.items[len(self.items)-1]
-		return None
+
+		raise ValueError('stack is empty')
 
 	def size(self):
 		return len(self.items)

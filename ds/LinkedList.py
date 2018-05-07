@@ -32,9 +32,9 @@ class LinkedList(object):
             self.curr_is_assigned = False
             raise StopIteration
         
-        val = self.curr.data
+        node = self.curr
         self.curr = self.curr.next_node
-        return val
+        return node
 
     def insert_at_head(self, data):
         new_node = Node(data)
@@ -127,6 +127,10 @@ class LinkedList(object):
         return slow
 
     def show(self):
+        if self.head is None:
+            print "List is empty"
+            return
+
         curr = self.head
         string = ''
         while curr.get_next() != None:

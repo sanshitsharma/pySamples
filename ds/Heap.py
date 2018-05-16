@@ -11,6 +11,9 @@ class Heap:
         self.__items = []
         self.__type = type
 
+    def __repr__(self):
+        return str(self.__items)
+
     def print_heap(self):
         print "--------------------"
         if self.__type == Type.MIN:

@@ -15,9 +15,9 @@ def binarySearch(arr, val):
     low = 0
     high = len(arr)-1
 
-    return __binSearch(arr, val, low, high)
+    return binSearchRecurse(arr, val, low, high)
 
-def __binSearch(a, val, l, h):
+def binSearchRecurse(a, val, l, h):
     #print "Evaluating array[", a[l], "...", a[h], "]"
     if l <= h:
         mid = (l+h)/2
@@ -27,12 +27,12 @@ def __binSearch(a, val, l, h):
             if (mid > l and a[mid-1] < val) or mid == l:
                 return -mid - 1
             else:
-                return __binSearch(a, val, l, mid - 1)
+                return binSearchRecurse(a, val, l, mid - 1)
         else: # val > a[mid]
             if (mid < h and a[mid+1] > val) or mid == h:
                 return -(mid+1) - 1
             else:
-                return __binSearch(a, val, mid+1, h)
+                return binSearchRecurse(a, val, mid+1, h)
 
     raise ValueError('value', val, 'not found in array')
 

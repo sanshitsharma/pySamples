@@ -23,8 +23,8 @@ class Type(Enum):
     POSTORDER = 3
 
 class BST:
-    def __init__(self):
-        self.root = None
+    def __init__(self, node=None):
+        self.root = node
     
     def __insert_recurse(self, node, value):
         if node is None:
@@ -56,7 +56,7 @@ class BST:
         result = self.__serialize(self.root, result)
         return result
 
-    def __preorder_traverse(self, node, pre_list=None):
+    def _preorder_traverse(self, node, pre_list=None):
         if node is None:
             return
 
@@ -64,12 +64,12 @@ class BST:
             pre_list = []
 
         pre_list.append(node.value)
-        self.__preorder_traverse(node.left, pre_list)
-        self.__preorder_traverse(node.right, pre_list)
+        self._preorder_traverse(node.left, pre_list)
+        self._preorder_traverse(node.right, pre_list)
 
     def preorder(self):
         pre_list = []
-        self.__preorder_traverse(self.root, pre_list)
+        self._preorder_traverse(self.root, pre_list)
 
         return pre_list
 

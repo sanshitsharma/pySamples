@@ -35,30 +35,37 @@ ref: https://practice.geeksforgeeks.org/problems/equilibrium-point/0
 """
 
 def get_equilibrium_point(a):
+    l = 0
+    r = len(a) - 1
+
     left_sum = 0
     right_sum = 0
 
-    # Calculate the left and right sum
-    n = len(a)
-    for i in range(n):
-        if i < n/2:
-            left_sum += a[i]
-        
-        if i > n/2:
-            right_sum += a[i]
+    left_sum += a[l]
+    right_sum += a[r]
 
-    print "left_sum =", left_sum
-    print "right_sum =", right_sum
+    while l < r:
+        #print "l =", l, "r =", r, "left_sum =", left_sum, "right_sum =", right_sum
+        if (l == r or r - l == 2) and left_sum == right_sum:
+            return l + 1
 
-    # Now we compare left_sum and right_sum and try to make them equal
-    '''
-    Set mid = n/2 
-    while mid < n and left_dum != right_sum:
-        if left sum < right sum, move one position to right and recalculate
-    '''
+        if left_sum == right_sum:
+            l += 1
+            left_sum += a[l]
+            r -= 1
+            right_sum += a[r]
+        elif left_sum > right_sum:
+            r -= 1
+            right_sum += a[r]
+        else:
+            l += 1
+            left_sum += a[l]
 
+    #print "Finally.. l =", l, "r =", r, "left_sum =", left_sum, "right_sum =", right_sum
+    return -1
 
 if __name__ == "__main__":
     #lst = [1, 3, 5, 2, 2]
-    lst = [4, 4, 3, 4, 5, 13]
+    #lst = [4, 4, 1, 4, 5, 13]
+    lst = [4, 42, 27, 16, 28, 3, 4, 5, 9, 3, 31, 5, 5, 29, 10, 18, 35, 35, 33, 19, 41, 23, 8, 32, 9, 5, 8, 18, 35, 13, 6, 7, 6, 10, 11, 13, 37, 2, 25, 7, 28, 43]
     print get_equilibrium_point(lst)

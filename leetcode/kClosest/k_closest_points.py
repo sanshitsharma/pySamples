@@ -4,11 +4,11 @@
 Given millions of points in a file, find the k closest points to origin
 '''
 
-import math
+import math, sys
 
 class Solution(object):
     def kClosestPoints(self, file, k):
-        dists = [(0, '')] * 2 * k
+        dists = [(sys.maxint, '')] * 2 * k
         #print dists
 
         offset = 0
@@ -25,13 +25,13 @@ class Solution(object):
             self.findKthSmallest(dists, k)
             #print "After quickselect:", dists
 
-        return dists[:k]
-        '''
+        #print dists
+        #return dists[:k]
+
         ans = []
         for i in range(k):
-            ans.append("(" + dists[i][1] + ")")
+            ans.append(dists[i][1].split(','))
         return ans
-        '''
         
 
     def findKthSmallest(self, dists, k):
@@ -100,5 +100,5 @@ class Solution(object):
 
 if __name__ == "__main__":
     file = 'data.txt'
-    k = 3
+    k = 7
     print Solution().kClosestPoints(file, k)

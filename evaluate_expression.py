@@ -39,12 +39,14 @@ def convert_to_postfix(eq):
                     postfix += op_stack.pop() + ' '
                 op_stack.pop()
             else:
-                while not op_stack.isEmpty() and (paMap[op_stack.peek()]['p'] > paMap[token]['p'] or (paMap[op_stack.peek()]['p'] == paMap[token]['p'] and paMap[token]['a'] == 'left')) and op_stack.peek() != '(':
+                #print "Stack Empty:", op_stack.isEmpty
+                #print "Stack Top:", op_stack.peek()
+                while not op_stack.isEmpty and (paMap[op_stack.peek()]['p'] > paMap[token]['p'] or (paMap[op_stack.peek()]['p'] == paMap[token]['p'] and paMap[token]['a'] == 'left') and op_stack.peek() != '('):
                     postfix += op_stack.pop() + ' '
                 op_stack.push(token)
 
     # Expression parsing is complete, dump whatever is left in the stack into the postfix expression
-    while not op_stack.isEmpty():
+    while not op_stack.isEmpty:
         postfix += op_stack.pop() + ' '
 
     return postfix
@@ -67,6 +69,8 @@ def evaluate(eq):
     # Step 1: Convert to Postfix notation
     postfix_eq = convert_to_postfix(eq)
 
+    #print "Postfix Notation:", postfix_eq
+
     # Evaluate the postfix expression
     operator = ''
 
@@ -88,7 +92,7 @@ def evaluate(eq):
     return postfix_eq, operand_stack.pop()
 
 if __name__ == "__main__":
-    expr = ["3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3", "(3+1) * (16-7)", "3 + (6 - 1)"]
+    expr = ["3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"]#, "(3+1) * (16-7)", "3 + (6 - 1)"]
     for eq in expr:
         post_eq, res = evaluate(eq)
         print "Postfix expr: " + post_eq, " Result = ", res

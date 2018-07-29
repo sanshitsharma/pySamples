@@ -1,102 +1,82 @@
 #!/usr/bin/python
 
-from itertools import *
+import numpy as np 
 
-backtrack_count = 0
+def getDiagStartPoints(x, y, n, dtype='principle'):
+    d_start = [x, y]
+    if dtype == 'principle':
+        while d_start[0] > 0 and d_start[1] > 0:
+            d_start[0] -= 1
+            d_start[1] -= 1
+    else:
+        while d_start[0] < n-1 and d_start[1] > 0:
+            d_start[0] += 1
+            d_start[1] -= 1
 
-def is_valid(board, x, y):
-    rows = len(board)
-    cols = len(board[0])
+    return d_start
+
+def isValid(mat, a, b):
+    r = len(mat)
+    c = len(mat[0])
 
     # Check row
-    for j in range(cols):
-        if board[x][j] == 1 and j != y:
+    for j in range(c):
+        if mat[a][j] == 1 and j != b:
             return False
 
-    # Check col
-    for i in range(rows):
-        if board[i][y] == 1 and i != x:
+    # Check Col
+    for i in range(r):
+        if mat[i][b] == 1 and i != a:
             return False
 
-    # Check diags:
+    # Check diagonals
+    # Given a coordinate (a,b), find out the top-left and the bottom-left 
+    # starting points of the two diagonals on which this point lies
+    pd_start = getDiagStartPoints(a, b, r, dtype='principle')
+    sd_start = getDiagStartPoints(a, b, r, dtype='secondary')
 
-    # Check bottom right
-    i = x + 1
-    j = y + 1
-    while i < rows and j < cols:
-        if board[i][j] == 1:
+    #print "Principle Diagonal Start point for (", a, ",", b, "): ", pd_start
+    #print "Secondary Diagonal Start point for (", a, ",", b, "): ", sd_start
+
+    # Check principle diagonal
+    i = pd_start[0]
+    j = pd_start[1]
+    while i < r and j < c:
+        if mat[i][j] == 1 and i != a and j != b:
             return False
         i += 1
         j += 1
 
-    # Check bottom left
-    i = x + 1
-    j = y - 1
-    while i < rows and j >= 0:
-        if board[i][j] == 1:
-            return False
-        i += 1
-        j -= 1
-
-    # Check top right
-    i = x - 1
-    j = y + 1
-    while i >= 0 and j < cols:
-        if board[i][j] == 1:
+    # Check secondary diagonal
+    i = sd_start[0]
+    j = sd_start[1]
+    while i < r and j < c:
+        if mat[i][j] == 1 and i != a and j != b:
             return False
         i -= 1
         j += 1
 
-    # Check top left
-    i = x - 1
-    j = y - 1
-    while i >= 0 and j >= 0:
-        if board[i][j] == 1:
-            return False
-        i -= 1
-        j -= 1
-
     return True
 
-def is_board_valid(board):
-    for r, c in product(range(len(board)), repeat=2):
-        if board[r][c] == 1 and not is_valid(board, r, c):
-            return False
+def solve(mat, queensLeft, r):
+    if queensLeft == 0:
+        return True
 
-    return True
-
-def solve(board, queens_left, r):
-    if queens_left == 0:
-        return is_board_valid(board)
-    
-    for c in range(len(board)):
-        board[r][c] = 1
-        if is_valid(board, r, c) and solve(board, queens_left - 1, r + 1):
+    for c in range(len(mat)):
+        mat[r][c] = 1
+        if isValid(mat, r, c) and solve(mat, queensLeft - 1, r + 1):
             return True
-        #global backtrack_count
-        #backtrack_count += 1
-        board[r][c] = 0 # backtrack
+        # If not, then backtrack
+        mat[r][c] = 0
 
-def place_queens(board):
-    queens_left = len(board)
-    row = 0
+    return False
 
-    return solve(board, queens_left, row)
+def placeQueens(n):
+    mat = np.zeros([n, n], dtype=int)
+    solve(mat, n, 0)
+
+    print mat
 
 if __name__ == "__main__":
-    #board = [[0, 1, 0, 0], [0, 0, 0, 1], [1, 0, 0, 0], [0, 0, 1, 0]]
-    #board = [[0,0], [0,0]]
-    board = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]] # 4 Queens
-    #board = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]] # 6 Queens
-    #board = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]] # 8 queens
-
-    res = place_queens(board)
-    #print "Backtrack Count =", backtrack_count
-    if res:
-        for r in range(len(board)):
-            string = ''
-            for c in range(len(board[0])):
-                string += str(board[r][c]) + ' '
-            print string
-    else:
-        print "no solution found"
+    n = 8
+    placeQueens(n)

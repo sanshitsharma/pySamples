@@ -132,6 +132,15 @@ class PriorityQueue:
 
         return (node.priority, node.data)
 
+    def updateKey(self, key, val):
+        for node in self.__pq:
+            if node.data == key:
+                node.priority = val
+                self.__fix()
+                return True
+
+        return False
+
     def is_empty(self):
         if len(self.__pq) == 0:
             return True

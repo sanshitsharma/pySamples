@@ -18,30 +18,20 @@ The downside is that it uses O(n) space.
 
 import sys
 
-def find_first_missing_pos(lst):
-    # Track the minimum positive number
-    c_min = sys.maxint
-    elem_map = {}
+def firstMissingPositive(a):
+    shift = segregate(a)
+    arr = a[shift:]
+    size = len(arr)
 
-    for i in range(len(lst)):
-        if lst[i] > 0 and lst[i] < c_min:
-            c_min = lst[i]
+    for i in range(len(arr)):
+        if abs(arr[i]) - 1 < size and arr[abs(arr[i]) - 1] > 0:
+            arr[abs(arr[i]) - 1] = -arr[abs(arr[i]) - 1]
 
-        elem_map[lst[i]] = True
+    for i in range(len(arr)):
+        if arr[i] > 0:
+            return i + 1
 
-    found = True
-    while found:
-        if c_min == 0:
-            c_min += 1
-            continue
-        
-        try:
-            elem_map[c_min]
-            c_min += 1
-        except KeyError as ke:
-            found = False
-
-    return c_min
+    return size + 1
 
 def segregate(a):
     j = 0
@@ -51,8 +41,16 @@ def segregate(a):
             j += 1
 
     return j
-
 '''
+def segregate(a):
+    j = 0
+    for i in range(len(a)):
+        if a[i] < 0:
+            a[i], a[j] = a[j], a[i]
+            j += 1
+
+    return j
+
 def find_missing(a):
     size = len(a)
     print a
@@ -72,5 +70,5 @@ def test(a):
 
 if __name__ == "__main__":
     lst = [2, 3, -7, 6, 8, 1, -10, 15]
-    print "First missing positive number:", find_first_missing_pos(lst)
+    print "First missing positive number:", firstMissingPositive(lst)
     #test(lst)

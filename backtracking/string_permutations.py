@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+'''
 class Permutations:
     @staticmethod
     def permutations(test_str):
@@ -18,23 +18,25 @@ class Permutations:
                 self.permute(a, l+1)
                 a[l], a[i] = a[i], a[l] # backtrack
 
-def permute(lst, start, end):
-    if start == end:
-        print ''.join(lst)
-        return
+'''
 
-    for i in range(start, end+1):
-        lst[start], lst[i] = lst[i], lst[start]
-        permute(lst, start+1, end)
-        lst[start], lst[i] = lst[i], lst[start]
+def permute(l, indx):
+    if indx == len(l)-1:
+            print ''.join(l)
+            return
+
+    for j in range(indx, len(l)):
+            l[indx], l[j] = l[j], l[indx]
+            permute(l, indx+1)
+            l[indx], l[j] = l[j], l[indx]
 
 def main():
     string = 'JON'
     lst = list(string)
     start = 0
     end = len(string) - 1
-    permute(lst, start, end)
-    #Permutations.permutations(str)
+    permute(lst, start)
+    #Permutations.permutations(string)
 
 if __name__ == "__main__":
     main()

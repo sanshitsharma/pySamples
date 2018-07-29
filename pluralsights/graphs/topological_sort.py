@@ -3,7 +3,7 @@
 '''
 Topological sort applies to a directed graph. It is most frequently used in DAGs.
 DAG's models precedence relationship where one node is precededed by one or more
-nodes expect for the start node. 
+nodes except for the start node. 
 A topological sort is any ordering of all the vertices of the graph that satisfies
 all precedence relationships.
 '''

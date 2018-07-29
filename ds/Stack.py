@@ -14,7 +14,7 @@ class Stack:
 		raise ValueError('stack is empty')
 
 	def peek(self):
-		if not self.isEmpty():
+		if not self.isEmpty:
 			return self.items[len(self.items)-1]
 
 		raise ValueError('stack is empty')

@@ -54,16 +54,22 @@ def build_distance_table(g, src):
         # Mark the current node as visited
         visited.append(v)
 
+        print "PROCESSING vertex", v , "from Queue..."
+        print "DT:", distance_table
         for node in g.get_adjacent_vertices(v):
+            print "Processing node:", node, "for vertex", v
             # Update the distance table
             if node not in visited:
                 distance_table[node] = (1+distance_table[v][0], v)
                 q.put(node)
+                print "Updated and added", node, "to queue.."
 
     return distance_table
 
 def shortest_path(g, src, dst):
     distance_table = build_distance_table(g, src)
+
+    print "Distance Table:", distance_table
 
     # Now to find the shortest path, we backtrack from dst node, until
     # we reach src node
@@ -82,19 +88,22 @@ def shortest_path(g, src, dst):
     return path
 
 if __name__ == "__main__":
-    g = AdjacencySetGraph(8, directed=False)
+    g = AdjacencySetGraph(4, directed=True)
 
     g.add_edge(0, 1)
     g.add_edge(1, 2)
     g.add_edge(1, 3)
     g.add_edge(2, 3)
+    '''
     g.add_edge(1, 4)
     g.add_edge(3, 5)
     g.add_edge(5, 4)
     g.add_edge(3, 6)
     g.add_edge(6, 7)
     g.add_edge(0, 7)
+    '''
 
-    print "Shorted path:", shortest_path(g, 0, 5)
-    print "Shorted path:", shortest_path(g, 0, 6)
-    print "Shorted path:", shortest_path(g, 7, 4)
+    res = shortest_path(g, 0, 3)
+    print "Shorted path:", res
+    #print "Shorted path:", shortest_path(g, 0, 6)
+    #print "Shorted path:", shortest_path(g, 7, 4)

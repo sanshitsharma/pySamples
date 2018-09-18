@@ -40,7 +40,6 @@ def nextGreaterBin(s):
     while a[i] == '1' and i > -1:
         i -= 1
 
-
     if i < 0:
         return "no greater binary"
 
@@ -60,5 +59,6 @@ def nextGreaterBin(s):
 
 if __name__ == "__main__":
     #s = '111'
-    s = '111000011100111110'
+    #s = '111000011100111110'
+    s = '101110'
     print nextGreaterBin(s)

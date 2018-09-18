@@ -19,30 +19,31 @@ Output:
 Ref: https://www.geeksforgeeks.org/generate-all-binary-strings-from-given-pattern/
 '''
 
-def generate(a, i, res):
-    if i < 0:
+def generateStrings(s):
+    a = list(s)
+    res = []
+    indx = 0
+
+    generate(a, indx, res)
+    return res
+
+def generate(a, indx, res):
+    if indx >= len(a):
         res.append(''.join(a))
         return
 
-    if a[i] != '?':
-        return generate(a, i-1, res)
+    if a[indx] != '?':
+        return generate(a, indx+1, res)
 
-    a[i] = '0'
-    generate(a, i-1, res)
-    a[i] = '1'
-    generate(a, i-1, res)
-    a[i] = '?' # backtracking
-
-def generateStrings(s):
-    res = []
-    a = list(s)
-    n = len(s) - 1
-
-    generate(a, n, res)
-    return res
+    a[indx] = '0'
+    generate(a, indx+1, res)
+    a[indx] = '1'
+    generate(a, indx+1, res)
+    a[indx] = '?'
 
 if __name__ == "__main__":
-    s = '1??0?101'
+    #s = '1??0?101'
+    s = '1?0?'
     r = generateStrings(s)
     for st in r:
         print st

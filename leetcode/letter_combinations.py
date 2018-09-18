@@ -28,7 +28,7 @@ def allPermutations(s1):#, s2):
     permute(a, 0, len(a)-1)
 
 if __name__ == "__main__":
-    s1 = 'aaabbb'
+    s1 = 'abcde'
     #s2 = 'def'
 
     allPermutations(s1)#, s2)

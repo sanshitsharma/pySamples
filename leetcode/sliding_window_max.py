@@ -19,7 +19,7 @@ Window position                Max
  1  3  -1  -3 [5  3  6] 7       6
  1  3  -1  -3  5 [3  6  7]      7
 Note: 
-You may assume k is always valid, 1 ≤ k ≤ input array's size for non-empty array.
+You may assume k is always valid, 1 <= k <= input array's size for non-empty array.
 
 Ref: https://leetcode.com/problems/sliding-window-maximum/description/
 '''
@@ -58,6 +58,8 @@ class Solution(object):
 
             q.append(i)
 
+        print "After first round:", q
+
         # Process the remaining elements
         for i in range(k, len(nums)):
             # The element at index 0 of q is the biggest element of 
@@ -68,17 +70,24 @@ class Solution(object):
             while q and q[0] <= i-k:
                 q.pop(0)
 
+            print "After sliding window:", q
+
             # Now remove all elements that are smaller than nums[i]
             while q and nums[i] >= nums[q[-1]]:
                 q.pop()
 
+            print "After removing smaller elems:", q
+
             q.append(i)
+
+            print "################"
 
         res.append(nums[q[0]])
         return res
 
 if __name__ == "__main__":
-    arr = [12, 1, 78, 90, 57, 89, 56]
+    #arr = [12, 1, 78, 90, 57, 89, 56]
+    arr = [3, 1, 5, 2, 4, 3, 7]
     #arr = [5, 4, 3, 2, 1]
     k = 3
     #printMax(arr, len(arr), k)

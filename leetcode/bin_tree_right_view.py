@@ -41,27 +41,23 @@ class Solution(object):
         res = []
 
         while evenQ or oddQ:
-            elem = None
-            while evenQ:
-                elem = evenQ.pop(0)
-                if elem.left:
-                    oddQ.append(elem.left)
-                if elem.right:
-                    oddQ.append(elem.right)
+            if evenQ:
+                res.append(evenQ[-1].val)
+                while evenQ:
+                    elem = evenQ.pop(0)
+                    if elem.left:
+                        oddQ.append(elem.left)
+                    if elem.right:
+                        oddQ.append(elem.right)
 
-            if elem:
-                res.append(elem.val)
-                elem = None
-
-            while oddQ:
-                elem = oddQ.pop(0)
-                if elem.left:
-                    evenQ.append(elem.left)
-                if elem.right:
-                    evenQ.append(elem.right)
-
-            if elem:
-                res.append(elem.val)
+            if oddQ:
+                res.append(oddQ[-1].val)
+                while oddQ:
+                    elem = oddQ.pop(0)
+                    if elem.left:
+                        evenQ.append(elem.left)
+                    if elem.right:
+                        evenQ.append(elem.right)
 
         return res
 

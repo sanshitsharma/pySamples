@@ -60,7 +60,7 @@ class Solution(object):
             self.getLeftBoundary(root, ans)
         #print "After left boundary:", ans
 
-        it not self.isLeaf(root):
+        if not self.isLeaf(root):
             self.getLeaves(root, ans)
         print "After leaves:", ans
 

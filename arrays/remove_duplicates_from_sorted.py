@@ -3,24 +3,20 @@
 def remove_dups(a):
     read = 0
     write = 0
-    seen = {}
+    seen = set()
 
     while read < len(a):
-        if a[read] in seen.keys():
+        if a[read] in seen:
             read += 1
             continue
 
         a[write] = a[read]
-        seen[a[read]] = True
-        write += 1
+        seen.add(a[read])
         read += 1
+        write += 1
 
-    rem = len(a) - write
-    for i in range(rem):
-        a.pop()
+    return a[:write]
 
 if __name__ == "__main__":
     a = [2, 2, 4, 4, 5, 10, 20, 20]
-    remove_dups(a)
-
-    print a
+    print remove_dups(a)

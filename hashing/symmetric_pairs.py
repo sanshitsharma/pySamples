@@ -14,22 +14,17 @@ Output: Following pairs have symmetric pairs
         (5, 10)  
 """
 
-from collections import defaultdict
-
 def find_symmetric_pairs(lst):
-    map = defaultdict()
+    pairMap = {}
     res = []
 
-    # Init the key, values pairs
-    map[0] = []
-    map[1] = []
-
-    for pair in reversed(lst):
-        if pair[0] in map[1] and pair[1] in map[0]:
-            res.append(pair)
-
-        map[0].append(pair[0])
-        map[1].append(pair[1])
+    for pair in lst:
+        try:
+            val = pairMap[pair[1]]
+            if val == pair[0]:
+                res.append((pair[1], pair[0]))
+        except:
+            pairMap[pair[0]] = pair[1]
 
     return res
 

@@ -24,6 +24,10 @@ class MaxPriorityQueue(object):
     def __repr__(self):
         return str(self.__pq)
 
+    def __iter__(self):
+        for node in self.__pq:
+            yield node.key, node.value
+
     def push(self, key, value):
         self.__pq.append(MaxPriorityQueue.Node(key, value))
         currIdx = len(self.__pq) - 1
@@ -47,6 +51,12 @@ class MaxPriorityQueue(object):
             self._heapify(0)
 
         return pqNode.key, pqNode.value
+
+    def peek(self):
+        if not self.__pq:
+            raise ValueError('priority queue is empty')
+
+        return self.__pq[0].key, self.__pq[0].value
     
     def _heapify(self, index):
         if not self._inBound(index):
@@ -64,12 +74,12 @@ class MaxPriorityQueue(object):
         # Case 2: Has two children
         elif hasLeft and hasRight:
             # If element at index is greater than both left and right, nothing to do
-            if self.__pq[index] > self.__pq[lChildIdx] and self.__pq[index] > self.__pq[rChildIdx]:
+            if self.__pq[index].key > self.__pq[lChildIdx].key and self.__pq[index].key > self.__pq[rChildIdx].key:
                 return
             
             # Else find the greater child and swap with it and then recurse
             isLeftGreater = False
-            if self.__pq[lChildIdx] > self.__pq[rChildIdx]:
+            if self.__pq[lChildIdx].key > self.__pq[rChildIdx].key:
                 isLeftGreater = True
 
             if isLeftGreater:
@@ -121,3 +131,5 @@ if __name__ == "__main__":
     print "fetched key:", key, " value:", value
 
     print "After Pop:", pq
+    for key, value in pq:
+        print "Dist:", key, " Value:", value
